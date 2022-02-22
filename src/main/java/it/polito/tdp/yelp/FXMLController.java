@@ -5,9 +5,12 @@
 package it.polito.tdp.yelp;
 
 import java.net.URL;
+import java.time.Year;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.yelp.model.Model;
+import it.polito.tdp.yelp.model.User;
+import it.polito.tdp.yelp.model.Vertici;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,13 +41,13 @@ public class FXMLController {
     private TextField txtX2; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbAnno"
-    private ComboBox<?> cmbAnno; // Value injected by FXMLLoader
+    private ComboBox<Year> cmbAnno; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtN"
     private TextField txtN; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbUtente"
-    private ComboBox<?> cmbUtente; // Value injected by FXMLLoader
+    private ComboBox<Vertici> cmbUtente; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtX1"
     private TextField txtX1; // Value injected by FXMLLoader
@@ -54,12 +57,37 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
 
+    	
+    	Year anno = cmbAnno.getValue() ;
+    	String nrecensioni= txtN.getText();
+    	Integer recensioni;
+    	try {
+			   recensioni= Integer.parseInt(nrecensioni);
+		   } catch(NumberFormatException ne) {
+			   txtResult.appendText("le recensioni devono essere un numero");
+			   return;
+		   }
+    	if( anno==null) {
+    		txtResult.appendText("Parametri obbligatori");
+    		return ;
+    	}
+    	
+    	this.model.creaGrafo( anno, recensioni);
+		   txtResult.appendText("grafo creato: "+"\n");
+		   txtResult.appendText("# VERTICI: "+this.model.nVertici()+"\n");
+		   txtResult.appendText("# ARCHI: "+this.model.nArchi()+"\n");
+  
+		   this.cmbUtente.getItems().addAll(model.VerticiGrafo());
+		 
     }
 
     @FXML
     void doUtenteSimile(ActionEvent event) {
-
+    	
+    	 txtResult.appendText("Utenti più simili a : " + cmbUtente.getValue() + "\n"+ "\n");
+    	  txtResult.appendText( model.UtentiConMaggiorGradoDiSimilarità(cmbUtente.getValue()));
     }
     
     @FXML
@@ -84,5 +112,11 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	for(int anno=2005; anno<=2013; anno++) {
+    		cmbAnno.getItems().add(Year.of(anno)) ;
+    	}
+    	
+    	
     }
 }
