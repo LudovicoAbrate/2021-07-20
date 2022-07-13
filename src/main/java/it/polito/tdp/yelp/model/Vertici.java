@@ -1,7 +1,6 @@
 package it.polito.tdp.yelp.model;
 
 public class Vertici {
-
 	
 	String id;
 	String nome;

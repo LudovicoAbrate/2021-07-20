@@ -79,20 +79,20 @@ public class Model {
 		List<Vertici> utenti= new ArrayList<Vertici>();
  		double grado=0;
  		String s ="";
- 		for(DefaultWeightedEdge a:grafo.edgesOf(utente)) 
+ 		for(DefaultWeightedEdge a:grafo.edgesOf(utente))  // prendo archi di quel vertice 
  		{
- 			if(grafo.getEdgeWeight(a)>grado) 
+ 			if(grafo.getEdgeWeight(a)>grado)   // se peso arco è maggiore del mio massimo che avevo
  			{
- 				grado=grafo.getEdgeWeight(a);
- 				utenti= new ArrayList<Vertici>();
+ 				grado=grafo.getEdgeWeight(a); // me lo salvo
+ 				utenti= new ArrayList<Vertici>(); // nuova lista
  				
- 				if(grafo.getEdgeTarget(a).equals(utente)) 
+ 				if(grafo.getEdgeTarget(a).equals(utente))  // essendo un grafo non orientato
  				{
- 					utenti.add(grafo.getEdgeSource(a));
+ 					utenti.add(grafo.getEdgeSource(a)); //prendo vertice da cui è partito
  				}
  				else 
  				{
- 					utenti.add(grafo.getEdgeTarget(a));
+ 					utenti.add(grafo.getEdgeTarget(a)); // sennò prendo quello fi arrivio
  				}
  			}
  			else if(grafo.getEdgeWeight(a)==grado) 

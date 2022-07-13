@@ -14,11 +14,13 @@ import it.polito.tdp.yelp.model.Review;
 import it.polito.tdp.yelp.model.User;
 import it.polito.tdp.yelp.model.Vertici;
 
+
 public class YelpDao {
 	
-	public List<Adiacenza> getAdiacenze( Year anno,Integer n){
+	
+public List<Adiacenza> getAdiacenze( Year anno,Integer n){
 		
-		String sql="select r1.user_id as us1, r2.user_id as us2, COUNT(r1.business_id = r2.business_id) as peso "
+		String sql="select r1.user_id as us1, r2.user_id as us2, COUNT(r1.review_text) as peso "
 				+ "from users u1,users u2, reviews r1, reviews r2 "
 				+ "where r1.user_id < r2.user_id "
 				+ "and u1.user_id = r1.user_id "
@@ -82,6 +84,9 @@ public class YelpDao {
 			return null;
 		}
 	}
+
+	
+
 
 	public List<Business> getAllBusiness(){
 		String sql = "SELECT * FROM Business";

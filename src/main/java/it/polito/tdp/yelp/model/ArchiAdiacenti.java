@@ -1,11 +1,9 @@
 package it.polito.tdp.yelp.model;
 
 public class ArchiAdiacenti {
-
+	
 	String v;
 	double peso;
-	
-	
 	
 	
 	public ArchiAdiacenti(String v, double peso) {

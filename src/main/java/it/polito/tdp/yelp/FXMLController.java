@@ -59,7 +59,6 @@ public class FXMLController {
     void doCreaGrafo(ActionEvent event) {
     	
 
-    	
     	Year anno = cmbAnno.getValue() ;
     	String nrecensioni= txtN.getText();
     	Integer recensioni;
@@ -74,20 +73,20 @@ public class FXMLController {
     		return ;
     	}
     	
-    	this.model.creaGrafo( anno, recensioni);
+    	this.model.creaGrafo( anno,recensioni);
+    	
 		   txtResult.appendText("grafo creato: "+"\n");
 		   txtResult.appendText("# VERTICI: "+this.model.nVertici()+"\n");
 		   txtResult.appendText("# ARCHI: "+this.model.nArchi()+"\n");
-  
+
 		   this.cmbUtente.getItems().addAll(model.VerticiGrafo());
 		 
     }
 
     @FXML
     void doUtenteSimile(ActionEvent event) {
-    	
     	 txtResult.appendText("Utenti più simili a : " + cmbUtente.getValue() + "\n"+ "\n");
-    	  txtResult.appendText( model.UtentiConMaggiorGradoDiSimilarità(cmbUtente.getValue()));
+   	  txtResult.appendText( model.UtentiConMaggiorGradoDiSimilarità(cmbUtente.getValue()));
     }
     
     @FXML
